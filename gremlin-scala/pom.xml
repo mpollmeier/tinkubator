@@ -5,17 +5,25 @@
     <parent>
         <groupId>com.tinkerpop.gremlin</groupId>
         <artifactId>gremlin</artifactId>
-        <version>2.1.0</version>
+        <version>2.2.0</version>
     </parent>
     <artifactId>gremlin-scala</artifactId>
-    <version>2.1.0</version>
+    <version>2.2.0</version>
     <packaging>jar</packaging>
     <name>Gremlin-Scala: Gremlin for the Scala Language</name>
+    <properties>
+        <gremlin.version>2.2.0</gremlin.version>
+    </properties>
     <developers>
         <developer>
             <name>Zach Cox</name>
             <email>zcox522@gmail.com</email>
             <url>http://theza.ch</url>
+        </developer>
+        <developer>
+            <name>Michael Pollmeier</name>
+            <email>michael@michaelpollmeier.com</email>
+            <url>http://www.michaelpollmeier.com</url>
         </developer>
     </developers>
     <mailingLists>
@@ -31,7 +39,7 @@
         <dependency>
             <groupId>com.tinkerpop.gremlin</groupId>
             <artifactId>gremlin-java</artifactId>
-            <version>2.1.0</version>
+            <version>${gremlin.version}</version>
         </dependency>
         <dependency>
             <groupId>com.tinkerpop</groupId>
@@ -108,13 +116,13 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
-             <scope>test</scope> 
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.tinkerpop.gremlin</groupId>
             <artifactId>gremlin-test</artifactId>
-            <version>2.1.0</version>
-             <scope>test</scope> 
+            <version>${gremlin.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     <repositories>
@@ -172,7 +180,7 @@
             <plugin>
                 <groupId>org.scala-tools</groupId>
                 <artifactId>maven-scala-plugin</artifactId>
-<!--                 <version>2.15.3-SNAPSHOT</version> 2.15.3 includes JLine in scala:console, but has issues after exit -->
+                <!-- <version>2.15.3-SNAPSHOT</version> --> <!-- 2.15.3 includes JLine in scala:console, but has issues after exit -->
                 <version>2.15.2</version>
                 <executions>
                     <execution>
@@ -182,54 +190,6 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <artifactId>maven-eclipse-plugin</artifactId>
-                <version>2.8</version>
-                <configuration>
-                    <additionalProjectnatures>
-                        <projectnature>org.scala-ide.sdt.core.scalanature</projectnature>
-                        <projectnature>org.eclipse.jdt.core.javanature</projectnature>
-                    </additionalProjectnatures>
-                    <classpathContainers>
-                       <classpathContainer>org.scala-ide.sdt.launching.SCALA_CONTAINER</classpathContainer>
-                    </classpathContainers>
-                    <sourceIncludes>
-                        <sourceInclude>**/*.scala</sourceInclude>
-                    </sourceIncludes>
-                    <additionalBuildcommands>
-                       <buildCommand>
-                           <name>org.scala-ide.sdt.core.scalabuilder</name>
-                           <arguments></arguments>
-                       </buildCommand>
-                    </additionalBuildcommands>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <version>1.7</version>
-                <executions>
-                    <execution>
-                        <id>add-source</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>add-source</goal>
-                        </goals>
-                        <configuration>
-                            <sources>
-                                <source>src/main/scala</source>
-                            </sources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
             </plugin>
         </plugins>
     </build>

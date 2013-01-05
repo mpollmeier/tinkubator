@@ -1,13 +1,12 @@
 package com.tinkerpop.gremlin.scala
 
 import com.tinkerpop.blueprints.{Graph, Vertex, Edge}
-import java.lang.{Iterable => JIterable}
 
 /**Adds convenience methods to [[com.tinkerpop.blueprints.Graph]]. */
 class ScalaGraph(val graph: Graph) {
   /**Returns all vertices. */
   def V: GremlinScalaPipeline[Vertex, Vertex] =
-	new GremlinScalaPipeline[Any, Vertex].start(graph.getVertices()).asInstanceOf[GremlinScalaPipeline[Vertex, Vertex]]
+    new GremlinScalaPipeline[Graph, Vertex].start(graph).V(graph).asInstanceOf[GremlinScalaPipeline[Vertex, Vertex]]
 
   /**Returns the vertices with the specified IDs. */
   def V(ids: Any*): Iterable[Vertex] = ids.map(graph.getVertex(_)) //TODO should'nt V and V(1,2) return the same type???
@@ -17,7 +16,7 @@ class ScalaGraph(val graph: Graph) {
 
   /**Returns all edges. */
   def E: GremlinScalaPipeline[Edge, Edge] =
-    new GremlinScalaPipeline[Any, Edge].start(graph.getEdges()).asInstanceOf[GremlinScalaPipeline[Edge, Edge]]
+    new GremlinScalaPipeline[Graph, Edge].start(graph).E(graph).asInstanceOf[GremlinScalaPipeline[Edge, Edge]]
 
   /**Returns the edges with the specified IDs. */
   def E(ids: Any*): Iterable[Edge] = ids map {
