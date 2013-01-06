@@ -83,22 +83,20 @@ class GremlinILoop extends ILoop {
     }
   }
 
-  class GremlinInterpreter extends this.ILoopInterpreter {
+  class GremlinInterpreter extends ILoopInterpreter {
     //also descends from IMain, the core interpreter class
-    override lazy val reporter: ConsoleReporter = new GremlinReporter(this)
+    override lazy val reporter: ReplReporter = new GremlinReporter(this)
 
     /**Returns the last request executed by this interpreter. */
-    def lastRequest: Option[Request] = prevRequestList.lastOption
+    def prevRequest: Option[Request] = prevRequestList.lastOption
 
     /**Returns the last value evaluated by this interpreter. See https://issues.scala-lang.org/browse/SI-4899 for details. */
-    def lastValue: Either[Throwable, AnyRef] = lastRequest.getOrElse(throw new NullPointerException()).lineRep.callEither("$result")
+    def lastValue: Either[Throwable, AnyRef] = prevRequest.getOrElse(throw new NullPointerException()).lineRep.callEither("$result")
   }
 
   /**Stop ReplReporter from printing to console. Instead we print in GremlinILoop.command. */
   class GremlinReporter(intp: GremlinInterpreter) extends ReplReporter(intp) {
     override def printMessage(msg: String) {}
-
-    //println("***" + msg)
   }
 
 }

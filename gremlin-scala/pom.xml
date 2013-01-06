@@ -13,6 +13,7 @@
     <name>Gremlin-Scala: Gremlin for the Scala Language</name>
     <properties>
         <gremlin.version>2.2.0</gremlin.version>
+        <scala.version>2.10.0</scala.version>
     </properties>
     <developers>
         <developer>
@@ -49,18 +50,18 @@
         <dependency>
             <groupId>org.scala-lang</groupId>
             <artifactId>scala-library</artifactId>
-            <version>2.9.1</version>
+            <version>${scala.version}</version>
         </dependency>
         <!-- CONSOLE -->
         <dependency>
             <groupId>org.scala-lang</groupId>
             <artifactId>scala-compiler</artifactId>
-            <version>2.9.1</version>
+            <version>${scala.version}</version>
         </dependency>
         <dependency>
             <groupId>org.scala-lang</groupId>
             <artifactId>jline</artifactId>
-            <version>2.9.1</version>
+            <version>${scala.version}</version>
         </dependency>
         <!-- Blueprints impls for repl -->
         <dependency>
@@ -188,6 +189,25 @@
                             <goal>compile</goal>
                             <goal>testCompile</goal>
                         </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>1.7</version>
+                <executions>
+                    <execution>
+                        <id>add-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>src/main/scala</source>
+                            </sources>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
